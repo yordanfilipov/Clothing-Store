@@ -61,11 +61,11 @@ cashier = Cashier()
 
 shirt11 = Shirt("Blue Cotton Shirt", "BrandS", 14.99, 'M', "blue")
 shirt12 = Shirt('White Cotton Shirt', 'BrandS', 15.99, 'M', 'white')
-trouser11 = Trousers('Black Cotton Trousers', 'BrandT', 29.99, 50, 'black')
-shores11 = Shoes('Black Leather Shoes', 'BrandS', 59.99, 43, 'black')
+trousers11 = Trousers('Black Cotton Trousers', 'BrandT', 29.99, 50, 'black')
+shoes11 = Shoes('Black Leather Shoes', 'BrandS', 59.99, 43, 'black')
 jacket11 = SuitJacket('Black Cotton Suit Jacket', 'BrandJ', 99.99, 50, 'black')
 
-products1 = [shirt11, shirt12, trouser11, shores11, jacket11]
+products1 = [shirt11, shirt12, trousers11, shoes11, jacket11]
 date1 = '2022-02-02 12:34:56'
 print(cashier.print_receipt(products1, date1))
 
