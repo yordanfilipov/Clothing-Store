@@ -1,4 +1,3 @@
-from products.product import Product
 from products.shirt import Shirt
 from products.shoes import Shoes
 from products.suit_jacket import SuitJacket
@@ -21,24 +20,27 @@ class Cashier:
             result += f'\n{product.name} - {product.brand}\n' \
                       f'${product.price:.2f}\n' \
                       f'#discount {product.discount_percentage:.0f}%  -${product.discount_price:.2f}'
+        subtotal = self.subtotal(products)
+        discount = self.discount(products)
         result += f'\n-----------------------------------------------------------------------------------\n'
-        result += f'SUBTOTAL: ${self.subtotal(products):.2f}\n'
-        result += f'DISCOUNT: -${self.discount(products):.2f}\n'
-        result += f'TOTAL: ${(self.subtotal(products) - self.discount(products)):.2f}\n'
+        result += f'SUBTOTAL: ${subtotal:.2f}\n'
+        result += f'DISCOUNT: -${discount:.2f}\n'
+        result += f'TOTAL: ${(subtotal - discount):.2f}\n'
         return result
 
     @staticmethod
     def calculate_discount(products, date):
-        if "Tuesday" in date:
-            for product in products:
+        for product in products:
+            product.discount = 0
+            if len(products) >= 3:
+                if product.__class__.__name__ == "Shoes" and "Tuesday" in date:
+                    product.discount = 0.25
+                else:
+                    product.discount = 0.2
+            elif "Tuesday" in date:
                 if product.__class__.__name__ == "Shirt":
                     product.discount = 0.1
-        if len(products) >= 3:
-            for product in products:
-                product.discount = 0.2
-        if "Tuesday" in date:
-            for product in products:
-                if product.__class__.__name__ == "Shoes":
+                elif product.__class__.__name__ == "Shoes":
                     product.discount = 0.25
         return products
 
